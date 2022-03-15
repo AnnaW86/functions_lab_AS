@@ -54,19 +54,18 @@ def get_slow_tasks():
     task_number = 0
     time = input("Print out the tasks that take more than how many minutes? ")
     for task in tasks:
-        max
         if int(task["time_taken"]) > int(time):
             slow_tasks.append(task["description"])
     if len(slow_tasks) == 0:        
         print("There are no chores that take that long.")
     else:
         print_statement = make_list_readable(slow_tasks, slow_tasks_statement, task_number)
-        print(f"These tasks all take more than {time} minutes: {print_statement}")
+        print(f"These tasks take more than {time} minutes: {print_statement}")
     
 
 def get_task_by_description():
-    task_description = input("What task would you like to search for? ")
     task_found_status = False
+    task_description = input("What task would you like to search for? ")
     for task in tasks:
         if task_description.lower() == task["description"].lower() and task["completed"]== False:
             print(f'\'{task["description"]}\' has not been done yet and should take {task["time_taken"]} minutes.')
@@ -75,7 +74,7 @@ def get_task_by_description():
             print(f'\'{task["description"]}\' has already been done.')
             task_found_status = True
     if task_found_status == False:
-        print(f"Sorry, I couldn't find \'{task_description}\' in your to do list.")
+        print(f"Sorry, I couldn't find \'{task_description}\' on your to do list.")
         
 
 def mark_as_complete():
@@ -93,7 +92,7 @@ def mark_as_complete():
 def add_a_task():
     task_description = input("What is the description of the task you would like to add? ")
     task_status_query = input("Has the task been completed? y/n ")
-    task_time = input("How many minutes would you like to accolate for this task? ")
+    task_time = input("How many minutes would you like to allocate for this task? ")
     if task_status_query == "y":
         task_status = True
     if task_status_query == "n":
