@@ -20,42 +20,35 @@ def make_list_readable(list, list_statement, list_index):
 
 
 def get_uncompleted_tasks(input_tasks):
-    uncompleted_tasks = []
     uncompleted_tasks_statement = ""
     task_number = 0
-    for task in input_tasks:
-        if task["completed"] == False:
-            uncompleted_tasks.append(task["description"])
+    uncompleted_tasks = [task["description"] for task in input_tasks if task["completed"] == False]    
     print_statement = make_list_readable(uncompleted_tasks, uncompleted_tasks_statement, task_number)      
-    return f"You still need to {print_statement}"
+    print(f"You still need to {print_statement}")
+    return uncompleted_tasks
 
 def get_completed_tasks(input_tasks):
-    completed_tasks = []
     completed_tasks_statement = ""
     task_number = 0
-    for task in input_tasks:
-        if task["completed"] == True:
-            completed_tasks.append(task["description"])
+    completed_tasks = [task["description"] for task in input_tasks if task["completed"] == True]
     print_statement = make_list_readable(completed_tasks, completed_tasks_statement, task_number)
-    return f"You have already done these ones: {print_statement}"
+    print(f"You have already done these ones: {print_statement}")
+    return completed_tasks
+
 
 def get_task_descriptions(input_tasks):
-    task_descriptions = []
     task_descriptions_statement = ""
     task_number = 0
-    for task in input_tasks:
-        task_descriptions.append(task["description"])
+    task_descriptions = [task["description"] for task in input_tasks]
     print_statement = make_list_readable(task_descriptions, task_descriptions_statement, task_number)
-    return f"Your to do list: \n{print_statement}"
+    print(f"Your to do list: \n{print_statement}")
+    return task_descriptions
 
 def get_slow_tasks(input_tasks):
-    slow_tasks = []
     slow_tasks_statement = ""
     task_number = 0
     time = input("Print out the tasks that take more than how many minutes? ")
-    for task in input_tasks:
-        if int(task["time_taken"]) > int(time):
-            slow_tasks.append(task["description"])
+    slow_tasks = [task["description"] for task in input_tasks if int(task["time_taken"]) > int(time)]
     if len(slow_tasks) == 0:        
         return "There are no chores that take that long."
     else:
@@ -127,11 +120,11 @@ while option != "q":
         return_to_menu()
     
     if option == "2":
-        print(get_uncompleted_tasks(tasks))
+        get_uncompleted_tasks(tasks)
         return_to_menu()
     
     if option == "3":
-        print(get_completed_tasks(tasks))
+        get_completed_tasks(tasks)
         return_to_menu()
 
     if option == "4":
